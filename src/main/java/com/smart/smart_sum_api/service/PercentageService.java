@@ -11,7 +11,7 @@ public class PercentageService {
     @Cacheable("dynamic-percentage")
     public BigDecimal getCurrentPercentage() {
         try {
-            Thread.sleep(5000); // Simula un delay de 5-segundos
+            Thread.sleep(5000); // Simulate a delay 5 seconds
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

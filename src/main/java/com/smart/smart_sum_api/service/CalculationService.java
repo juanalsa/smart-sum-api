@@ -35,7 +35,7 @@ public class CalculationService {
         } catch (Exception e) {
             logEntry.setError("Error=" + e.getMessage());
             eventPublisher.publishEvent(new LogEvent(this, logEntry));
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error calculando porcentaje", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error getting percentage", e);
         }
 
         eventPublisher.publishEvent(new LogEvent(this, logEntry));
