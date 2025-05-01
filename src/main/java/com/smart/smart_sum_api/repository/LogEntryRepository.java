@@ -1,4 +1,9 @@
 package com.smart.smart_sum_api.repository;
 
-public interface LogEntryRepository {
+import com.smart.smart_sum_api.entity.LogEntry;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface LogEntryRepository extends JpaRepository<LogEntry, Long> {
 }
