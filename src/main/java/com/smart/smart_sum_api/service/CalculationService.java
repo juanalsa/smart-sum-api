@@ -4,6 +4,7 @@ import com.smart.smart_sum_api.dto.CalculationRequest;
 import com.smart.smart_sum_api.dto.CalculationResponse;
 import com.smart.smart_sum_api.entity.LogEntry;
 import com.smart.smart_sum_api.event.LogEvent;
+import com.smart.smart_sum_api.exception.PercentageServiceUnavailableException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,10 @@ public class CalculationService {
 
     private final PercentageService percentageService;
     private final ApplicationEventPublisher eventPublisher;
+    private BigDecimal cachedPercentage = null;
 
     public CalculationResponse calculate(CalculationRequest request) {
+        BigDecimal percentage;
         BigDecimal result;
         LogEntry logEntry = new LogEntry();
         logEntry.setTimestamp(LocalDateTime.now());
@@ -28,17 +31,23 @@ public class CalculationService {
         logEntry.setParameters("num1=" + request.getNum1() + ", num2=" + request.getNum2());
 
         try {
-            BigDecimal percentage = percentageService.getCurrentPercentage();
-            BigDecimal sum = request.getNum1().add(request.getNum2());
-            result = sum.multiply(BigDecimal.ONE.add(percentage));
-            logEntry.setResponse("result=" + result);
+            percentage = percentageService.getCurrentPercentage();
+            cachedPercentage = percentage;
         } catch (Exception e) {
-            logEntry.setError("Error=" + e.getMessage());
-            eventPublisher.publishEvent(new LogEvent(this, logEntry));
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error getting percentage", e);
+            if (cachedPercentage != null) {
+                percentage = cachedPercentage;
+            } else {
+                logEntry.setError("Error=" + e.getMessage());
+                eventPublisher.publishEvent(new LogEvent(this, logEntry));
+                throw new PercentageServiceUnavailableException("Error no cached percentage available and external service failed.");
+            }
         }
 
+        BigDecimal sum = request.getNum1().add(request.getNum2());
+        result = sum.multiply(BigDecimal.ONE.add(percentage));
+        logEntry.setResponse("result=" + result);
         eventPublisher.publishEvent(new LogEvent(this, logEntry));
+
         return new CalculationResponse(result);
     }
 }

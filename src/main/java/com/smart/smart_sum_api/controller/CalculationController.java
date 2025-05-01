@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/calculate")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class CalculationController {
 
     private final CalculationService calculationService;
 
-    @PostMapping
+    @PostMapping("/calculate")
     public ResponseEntity<CalculationResponse> calculate(@RequestBody @Valid CalculationRequest request) {
         CalculationResponse response = calculationService.calculate(request);
         return ResponseEntity.ok(response);

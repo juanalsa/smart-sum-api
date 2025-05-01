@@ -4,9 +4,20 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Random;
 
 @Service
 public class PercentageService {
+
+    private Random random = new Random();
+
+    public PercentageService(Random random) {
+        this.random = random;
+    }
+
+    public PercentageService() {
+        this(new Random());
+    }
 
     @Cacheable("dynamic-percentage")
     public BigDecimal getCurrentPercentage() {
@@ -15,6 +26,11 @@ public class PercentageService {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        return new BigDecimal("0.10");
+
+        if (random.nextBoolean()) {
+            return new BigDecimal("0.10");
+        } else {
+            throw new RuntimeException("Percentage service failed");
+        }
     }
 }
