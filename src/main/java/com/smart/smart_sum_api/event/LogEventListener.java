@@ -17,7 +17,7 @@ public class LogEventListener {
     @Async
     @EventListener
     public void handleLogEvent(LogEvent event) {
-        // Save the log entry to the database
+        // Registra el evento del log en la base de datos
         repository.save(event.getLogEntry());
     }
 }
