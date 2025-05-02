@@ -1,7 +1,7 @@
 package com.smart.smart_sum_api.controller;
 
-import com.smart.smart_sum_api.dto.LogEntryResponse;
-import com.smart.smart_sum_api.entity.LogEntry;
+import com.smart.smart_sum_api.model.dto.LogEntryResponse;
+import com.smart.smart_sum_api.model.entity.LogEntry;
 import com.smart.smart_sum_api.repository.LogEntryRepository;
 import com.smart.smart_sum_api.service.LogService;
 import org.junit.jupiter.api.BeforeEach;

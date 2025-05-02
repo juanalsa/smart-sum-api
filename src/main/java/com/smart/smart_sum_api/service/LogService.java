@@ -1,7 +1,7 @@
 package com.smart.smart_sum_api.service;
 
-import com.smart.smart_sum_api.dto.LogEntryResponse;
-import com.smart.smart_sum_api.entity.LogEntry;
+import com.smart.smart_sum_api.model.dto.LogEntryResponse;
+import com.smart.smart_sum_api.model.entity.LogEntry;
 import com.smart.smart_sum_api.repository.LogEntryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

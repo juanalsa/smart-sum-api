@@ -1,4 +1,4 @@
-package com.smart.smart_sum_api.entity;
+package com.smart.smart_sum_api.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
