@@ -59,11 +59,13 @@ class LogControllerTest {
 
     @Test
     void should_return_all_logs() throws Exception {
+        // Arrange
         Page<LogEntryResponse> mockPage = new PageImpl<>(List.of(logEntryResp1, logEntryResp2),
                 PageRequest.of(0, 10), 2);
 
         when(logService.getHistory(any(PageRequest.class), eq(false))).thenReturn(mockPage);
 
+        // Act & Assert
         mockMvc.perform(get("/api/history")
                         .param("page", "0")
                         .param("size", "10"))
@@ -73,11 +75,13 @@ class LogControllerTest {
 
     @Test
     void should_return_only_error_logs_when_only_errors_true() throws Exception {
+        // Arrange
         Page<LogEntryResponse> mockPage = new PageImpl<>(List.of(logEntryResp2),
                 PageRequest.of(0, 10), 1);
 
         when(logService.getHistory(any(PageRequest.class), eq(true))).thenReturn(mockPage);
 
+        // Act & Assert
         mockMvc.perform(get("/api/history")
                         .param("page", "0")
                         .param("size", "10")

@@ -39,7 +39,7 @@ public class CalculationService {
             } else {
                 logEntry.setError("Error=" + e.getMessage());
                 eventPublisher.publishEvent(new LogEvent(this, logEntry));
-                throw new PercentageServiceUnavailableException("Error no cached percentage available and external service failed.");
+                throw new PercentageServiceUnavailableException("Error no cached percentage available and external service failed");
             }
         }
 

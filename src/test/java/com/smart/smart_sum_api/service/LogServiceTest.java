@@ -29,27 +29,33 @@ class LogServiceTest {
 
     @Test
     void should_return_all_logs_when_only_errors_is_false() {
+        // Arrange
         Pageable pageable = PageRequest.of(0, 10);
         List<LogEntry> entries = List.of(new LogEntry(), new LogEntry());
         Page<LogEntry> page = new PageImpl<>(entries, pageable, entries.size());
 
         when(repository.findAll(pageable)).thenReturn(page);
 
+        // Act
         Page<LogEntryResponse> result = logService.getHistory(pageable, false);
 
+        // Assert
         assertEquals(2, result.getTotalElements());
     }
 
     @Test
     void should_return_only_errors_when_only_errors_is_true() {
+        // Arrange
         Pageable pageable = PageRequest.of(0, 10);
         List<LogEntry> entries = List.of(new LogEntry());
         Page<LogEntry> page = new PageImpl<>(entries, pageable, entries.size());
 
         when(repository.findByErrorIsNotNull(pageable)).thenReturn(page);
 
+        // Act
         Page<LogEntryResponse> result = logService.getHistory(pageable, true);
 
+        // Assert
         assertEquals(1, result.getTotalElements());
     }
 }
