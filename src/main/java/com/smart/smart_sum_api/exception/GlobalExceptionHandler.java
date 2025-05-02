@@ -2,6 +2,7 @@ package com.smart.smart_sum_api.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -20,6 +21,11 @@ public class GlobalExceptionHandler {
             errors.add(error.getDefaultMessage());
         });
         return buildErrorResponse(HttpStatus.BAD_REQUEST, errors.toString());
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidFormat(HttpMessageNotReadableException ex) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, "Invalid input: num1 and num2 must be numeric (BigDecimal)");
     }
 
     @ExceptionHandler(ApiException.class)

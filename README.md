@@ -119,7 +119,13 @@ Performs a sum of `num1` and `num2`, then applies a dynamic percentage to the re
 
 **Possible Status Codes:**
 - `200 OK`: Calculation completed successfully.
-- `400 Bad Request`: Missing or invalid parameters.
+- `400 Bad Request`: Missing, invalid, or non-numeric parameters.
+  - Example:
+    ```json
+    {
+      "error": "Invalid input: num1 and num2 must be numeric (BigDecimal)"
+    }
+    ```
 - `503 Service Unavailable`: Percentage service unavailable and no cached value.
 
 ---
