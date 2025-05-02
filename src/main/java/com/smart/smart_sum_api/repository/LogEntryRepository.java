@@ -1,6 +1,6 @@
 package com.smart.smart_sum_api.repository;
 
-import com.smart.smart_sum_api.entity.LogEntry;
+import com.smart.smart_sum_api.model.entity.LogEntry;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

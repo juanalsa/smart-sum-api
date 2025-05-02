@@ -1,6 +1,6 @@
 package com.smart.smart_sum_api.event;
 
-import com.smart.smart_sum_api.entity.LogEntry;
+import com.smart.smart_sum_api.model.entity.LogEntry;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 

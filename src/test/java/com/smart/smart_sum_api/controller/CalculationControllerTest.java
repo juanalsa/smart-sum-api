@@ -1,6 +1,6 @@
 package com.smart.smart_sum_api.controller;
 
-import com.smart.smart_sum_api.dto.CalculationResponse;
+import com.smart.smart_sum_api.model.dto.CalculationResponse;
 import com.smart.smart_sum_api.exception.PercentageServiceUnavailableException;
 import com.smart.smart_sum_api.service.CalculationService;
 import org.junit.jupiter.api.BeforeEach;

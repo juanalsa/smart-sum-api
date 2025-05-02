@@ -1,7 +1,7 @@
 package com.smart.smart_sum_api.service;
 
-import com.smart.smart_sum_api.dto.CalculationRequest;
-import com.smart.smart_sum_api.dto.CalculationResponse;
+import com.smart.smart_sum_api.model.dto.CalculationRequest;
+import com.smart.smart_sum_api.model.dto.CalculationResponse;
 import com.smart.smart_sum_api.exception.ApiException;
 import com.smart.smart_sum_api.exception.PercentageServiceUnavailableException;
 import org.junit.jupiter.api.Test;
